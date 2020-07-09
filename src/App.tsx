@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useFormik } from 'formik';
 import { TodoList } from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import Example from './Example';
+
 import './App.css';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import {
@@ -11,6 +14,16 @@ import {
   Field,
   FieldProps,
 } from 'formik';
+
+const initialValues = {
+  fname: 'Krishna',
+  lname: '',
+
+}
+const onSubmit = values => {
+  console.log('Form data', values)
+}
+
 // Array taking Todo generic
 const initialTodos: Array<Todo> = [
   {
@@ -23,6 +36,11 @@ const initialTodos: Array<Todo> = [
   }
 ];
 const App: React.FC = () => {
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    // validate,
+  })
   const [todos, setTodos] = useState(initialTodos);
   const toggleTodo: ToggleTodo = (selectedTodo) => {
     const newTodo = todos.map(todo => {
@@ -43,21 +61,23 @@ const App: React.FC = () => {
   };
 
   return (
-
     <React.Fragment>
       <Container className="container-fluid container-margin">
         <Row className="row">
-          <Col className="col-sm-6" style={{ backgroundColor: 'rgb(212, 212, 212)' }}>
+          <Col className="col-sm-6" style={{ backgroundColor: 'rgb(212, 212, 212)', minHeight: '400px' }}>
+            <h1>List of items</h1><hr />
             <TodoList todos={todos} toggleTodo={toggleTodo} />
             <AddTodoForm addTodo={addTodo} />
+            <Example />
           </Col>
-          <Col className="col-sm-6" style={{ backgroundColor: 'rgb(224, 224, 224)' }}>
+          <Col className="col-sm-6" style={{ backgroundColor: 'rgb(224, 224, 224)', minHeight: '400px' }}>
             <div>
-              <form>
-                <label>First name:</label><br />
-                <input type="text" id="fname" name="fname" /><br />
-                <label>Last name:</label><br />
-                <input type="text" id="lname" name="lname" />
+              <h1>Edit Selected</h1><hr />
+              <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="fname">First name:</label><br />
+                <input type="text" id="fname" name="fname" onChange={formik.handleChange} value={formik.values.fname} /><br />
+                <label htmlFor="firstname">Last name:</label><br />
+                <input type="text" id="lname" name="lname" onChange={formik.handleChange} value={formik.values.lname} />
               </form>
             </div>
           </Col>
