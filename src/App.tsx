@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import { TodoList } from './TodoList';
 import AddTodoForm from './AddTodoForm';
 import Example from './Example';
+import FormikForm from './FormikForm';
+
 
 import './App.css';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
@@ -35,6 +37,7 @@ const initialTodos: Array<Todo> = [
     completed: false
   }
 ];
+
 const App: React.FC = () => {
   const formik = useFormik({
     initialValues,
@@ -69,16 +72,13 @@ const App: React.FC = () => {
             <TodoList todos={todos} toggleTodo={toggleTodo} />
             <AddTodoForm addTodo={addTodo} />
             <Example />
+            <div className="container">
+            </div>
           </Col>
           <Col className="col-sm-6" style={{ backgroundColor: 'rgb(224, 224, 224)', minHeight: '400px' }}>
             <div>
               <h1>Edit Selected</h1><hr />
-              <form onSubmit={formik.handleSubmit}>
-                <label htmlFor="fname">First name:</label><br />
-                <input type="text" id="fname" name="fname" onChange={formik.handleChange} value={formik.values.fname} /><br />
-                <label htmlFor="firstname">Last name:</label><br />
-                <input type="text" id="lname" name="lname" onChange={formik.handleChange} value={formik.values.lname} />
-              </form>
+              <FormikForm />
             </div>
           </Col>
         </Row>
