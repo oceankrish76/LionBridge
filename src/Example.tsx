@@ -12,7 +12,7 @@ const MyOutput = ({ field, form, ...props }) => {
 const Example = () => (
     <div>
         <h1>My Form</h1>
-        
+
         <Formik
             initialValues={{ email: '', color: 'red', firstName: '', lastName: '' }}
             onSubmit={(values, actions) => {
@@ -25,13 +25,6 @@ const Example = () => (
 
             {(props: FormikProps<any>) => (
                 <Form>
-                    <Field type="email" name="email" placeholder="Email" />
-                    <Field as="select" name="color">
-                        <option value="red">Red</option>
-                        <option value="green">Green</option>
-                        <option value="blue">Blue</option>
-                    </Field>
-
                     <Field name="lastName">
                         {({
                             field, // { name, value, onChange, onBlur }

@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { TodoList } from './TodoList';
-import AddTodoForm from './AddTodoForm';
-import Example from './Example';
+
 import FormikForm from './FormikForm';
+import axios from 'axios';
 
 
 import './App.css';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
-import {
-  Formik,
-  FormikHelpers,
-  FormikProps,
-  Form,
-  Field,
-  FieldProps,
-} from 'formik';
+import { type } from 'os';
+
+let listitems = [];
 
 const initialValues = {
   fname: 'Krishna',
@@ -38,7 +32,27 @@ const initialTodos: Array<Todo> = [
   }
 ];
 
-const App: React.FC = () => {
+const App: React.FC = (props) => {
+  const [data, setData] = useState({ items: [] });
+
+  useEffect(() => {
+    const getResult = async () => {
+      await axios('http://localhost:5000/all-lists');
+    };
+    getResult();
+    //setData(result.data);
+  }, []);
+
+  const getPage = async (props) =>  {
+    const response = await axios('http://localhost:5000/all-lists');
+    const json = await response.data.result
+
+    //JSON.stringify(json);
+    console.log('type is : ' + typeof (json));
+    //return json.name;
+  }
+
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -69,9 +83,13 @@ const App: React.FC = () => {
         <Row className="row">
           <Col className="col-sm-6" style={{ backgroundColor: 'rgb(212, 212, 212)', minHeight: '400px' }}>
             <h1>List of items</h1><hr />
-            <TodoList todos={todos} toggleTodo={toggleTodo} />
-            <AddTodoForm addTodo={addTodo} />
-            <Example />
+            
+            {getPage}
+            {/* <button type="button" onClick={getList}>Display list</button> */}
+
+
+            {/* <TodoList todos={todos} toggleTodo={toggleTodo} /> */}
+            {/* <AddTodoForm addTodo={addTodo} /> */}
             <div className="container">
             </div>
           </Col>

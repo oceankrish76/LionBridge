@@ -1,5 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field, FormikHelpers, FormikErrors, FormikTouched, FieldArray, FieldArrayRenderProps } from 'formik';
+/* import * as Yup from 'yup';
+let yup = require('yup'); 
+*/
 
 interface FormValues {
     name: string;
@@ -70,7 +73,7 @@ export default function FormikForm() {
                             <p>
                                 <label>
                                     Name:<br />
-                                    <Field type="text" name="name" />
+                                    <Field type="text" name="name" label="name" required />
                                     <button type="button" onClick={() => setTouched({ name: true }, false)}>Touched</button>
                                     <button type="button" onClick={() => setTouched({ name: false }, false)}>Untouched</button>
                                     {formikProps.touched.name ? 'Touched ' : ''}
@@ -80,7 +83,7 @@ export default function FormikForm() {
                             <p>
                                 <label>
                                     URL:<br />
-                                    <Field type="text" name="repo.url" />
+                                    <Field type="text" name="repo.url" label="url" required />
                                     <button type="button" onClick={() => setTouched({ repo: { url: true } }, false)}>Touched</button>
                                     <button type="button" onClick={() => setTouched({ repo: { url: false } }, false)}>Untouched</button>
                                     {formikProps.touched.repo ?.url ? 'Touched ' : ''}
@@ -90,7 +93,7 @@ export default function FormikForm() {
                             <p>
                                 <label>
                                     Type:<br />
-                                    <Field type="text" name="repo.type" />
+                                    <Field type="text" name="repo.type" label="type" required />
                                     <button type="button" onClick={() => setTouched({ repo: { type: true } }, false)}>Touched</button>
                                     <button type="button" onClick={() => setTouched({ repo: { type: false } }, false)}>Untouched</button>
                                     {formikProps.touched.repo ?.type ? 'Touched ' : ''}
@@ -128,6 +131,28 @@ export default function FormikForm() {
                                 <button type="button" onClick={resetForm}>Reset form</button>
                                 <button type="submit">Submit</button>
                             </p>
+                            <div style={{ border: '1px solid white', padding: '1em' }}>
+                                <div className="items">
+                                    <h3>Name: {JSON.stringify(formikProps.values.name)}
+                                        <span className="namespan">
+                                            <button type="button" style={{ border: 'none', color: 'blue', backgroundColor: '#e0e0e0' }}>Edit</button>
+                                        </span></h3>
+                                </div>
+                                <div className="items">
+                                    <h3>Url: {JSON.stringify(formikProps.values.repo.url)}
+                                        <span className="namespan">
+                                            <button type="button" style={{ border: 'none', color: 'blue', backgroundColor: '#e0e0e0' }}>Edit</button>
+                                        </span>
+                                    </h3>
+                                </div>
+                                <div className="items">
+                                    <h3>Type: {JSON.stringify(formikProps.values.repo.type)}
+                                        <span className="namespan">
+                                            <button type="button" style={{ border: 'none', color: 'blue', backgroundColor: '#e0e0e0' }}>Edit</button>
+                                        </span>
+                                    </h3>
+                                </div>
+                            </div>
                             <p>
                                 Values: {JSON.stringify(formikProps.values)}
                             </p>
