@@ -1,4 +1,4 @@
-![Snapshot](https://github.com/oceankrish76/https://github.com/oceankrish76/LionBridge/blob/master/public/lb.png?raw=true)
+![Snapshot](https://github.com/oceankrish76/LionBridge/blob/versionone/public/lb.png)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
