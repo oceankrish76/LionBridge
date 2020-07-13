@@ -3,13 +3,19 @@ import { useFormik } from 'formik';
 
 import FormikForm from './FormikForm';
 import axios from 'axios';
-
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 
 import './App.css';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { type } from 'os';
 
-let listitems = [];
+let listitems = [] as any;
 
 const initialValues = {
   fname: 'Krishna',
@@ -33,25 +39,19 @@ const initialTodos: Array<Todo> = [
 ];
 
 const App: React.FC = (props) => {
-  const [data, setData] = useState({ items: [] });
+  const [listItems, setlistItems] = useState([{ id: 0, name: '', location: 'Oulu', rent: 25, contactEmail: 'test@test.com' }]);
 
-  useEffect(() => {
-    const getResult = async () => {
-      await axios('http://localhost:5000/all-lists');
-    };
-    getResult();
-    //setData(result.data);
-  }, []);
-
-  const getPage = async (props) =>  {
-    const response = await axios('http://localhost:5000/all-lists');
-    const json = await response.data.result
-
-    //JSON.stringify(json);
-    console.log('type is : ' + typeof (json));
-    //return json.name;
+  const PATH = 'http://localhost:5000/all-lists';
+  async function fetchData() {
+    const res = await fetch(PATH);
+    res
+      .json()
+      .then(res => setlistItems(res.result))
+      .catch(err => alert(err));
   }
-
+  useEffect(() => {
+    fetchData();
+  });
 
   const formik = useFormik({
     initialValues,
@@ -83,13 +83,32 @@ const App: React.FC = (props) => {
         <Row className="row">
           <Col className="col-sm-6" style={{ backgroundColor: 'rgb(212, 212, 212)', minHeight: '400px' }}>
             <h1>List of items</h1><hr />
-            
-            {getPage}
-            {/* <button type="button" onClick={getList}>Display list</button> */}
 
 
-            {/* <TodoList todos={todos} toggleTodo={toggleTodo} /> */}
-            {/* <AddTodoForm addTodo={addTodo} /> */}
+            <Table>
+              <TableHead>
+                <TableRow style={{ backgroundColor: '#c5c5c5', color: 'white', }}>
+                  <TableCell>List Items</TableCell>
+                  <TableCell >Edit</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {listItems.map((row, index) => {
+                  return (
+                    <TableRow key={row.id}>
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        <Button color="primary" onClick={() => alert('In progress')}>
+                          Edit
+                                </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
             <div className="container">
             </div>
           </Col>
