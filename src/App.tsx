@@ -83,8 +83,6 @@ const App: React.FC = (props) => {
         <Row className="row">
           <Col className="col-sm-6" style={{ backgroundColor: 'rgb(212, 212, 212)', minHeight: '400px' }}>
             <h1>List of items</h1><hr />
-
-
             <Table>
               <TableHead>
                 <TableRow style={{ backgroundColor: '#c5c5c5', color: 'white', }}>
