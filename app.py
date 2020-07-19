@@ -1,11 +1,15 @@
 import flask 
 from flask import jsonify
 from flask import request
+# from pymongo import MongoClient
+# from bson.objectid import ObjectId
 from bson import ObjectId
+# from pymongo.objectid import ObjectId
 from flask_pymongo import PyMongo
-
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
+CORS(app)
 
 app.config['MONGO_DBNAME'] = 'lionbridge'
 app.config['MONGO_URI'] = 'mongodb+srv://oceankrish76:2r1Pa7Hc0LqlqSrd@cluster0-hoxdz.mongodb.net/lionbridge?retryWrites=true&w=majority'

@@ -1,6 +1,7 @@
 # To install it you need 
 Python >= 3.6
 pip3 
+pip3 install -U flask-cors
 
 # Installation process!!
 - Make virtual environment using python3 
@@ -11,6 +12,8 @@ pip3
   pip3 install -r requirements.txt 
          or 
   python -m pip install -r requirements.txt
+  pip3 install -U flask-cors
+  
 - run the app 
   python app.py
 
