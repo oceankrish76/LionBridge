@@ -77,6 +77,11 @@ const App: React.FC = (props) => {
       setTodos([...todos, { text: newTodo, completed: false }]);
   };
 
+  const begin = (rowname) => {
+    //console.log('onclick pass data props to FormikForm');
+    console.log(rowname);
+  }
+
   return (
     <React.Fragment>
       <ButtonAppBar />
@@ -99,9 +104,9 @@ const App: React.FC = (props) => {
                         {row.name}
                       </TableCell>
                       <TableCell component="th" scope="row">
-                        <Button color="primary" onClick={() => alert('In progress')}>
+                        <Button color="primary" onClick={() => begin(row.name)}>
                           Edit
-                                </Button>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   );

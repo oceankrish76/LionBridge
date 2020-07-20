@@ -13,7 +13,7 @@ interface FormValues {
     labels: Array<{ name: string; value: string }>;
 }
 
-export default function FormikForm() {
+export default function FormikForm(props) {
     const initialValues: FormValues = {
         name: '',
         repo: {
@@ -110,7 +110,7 @@ export default function FormikForm() {
                                                     return (
                                                         <React.Fragment key={index}>
                                                             {index + 1}.
-                              <Field type="text" name={`labels.${index}.name`} />
+                                                        <Field type="text" name={`labels.${index}.name`} />
                                                             <Field type="text" name={`labels.${index}.value`} />
                                                             <button type="button" onClick={() => fieldArrayProps.remove(index)}>Remove</button>
                                                             {formikProps.touched.labels ?.[index] ?.name ? 'Name touched' : ''}
