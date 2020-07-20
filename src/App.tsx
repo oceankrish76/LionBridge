@@ -23,7 +23,7 @@ const initialValues = {
 
 }
 const onSubmit = values => {
-  console.log('Form data', values)
+  //console.log('Form data', values)
 }
 
 // Array taking Todo generic
@@ -39,11 +39,15 @@ const initialTodos: Array<Todo> = [
 ];
 
 const App: React.FC = (props) => {
-  const [listItems, setlistItems] = useState([{ id: 0, name: '', location: 'Oulu', rent: 25, contactEmail: 'test@test.com' }]);
+  // const [listItems, setlistItems] = useState([{ id: 0, name: '', location: 'Oulu', rent: 25, contactEmail: 'test@test.com' }]);
+  //console.log(props);
+  const [listItems, setlistItems] = useState();
 
   const PATH = 'http://localhost:5000/all-lists';
   async function fetchData() {
     const res = await fetch(PATH);
+    console.log("this is res data", res)
+
     res
       .json()
       .then(res => setlistItems(res.result))
@@ -51,7 +55,7 @@ const App: React.FC = (props) => {
   }
   useEffect(() => {
     fetchData();
-  });
+  }, []);
 
   const formik = useFormik({
     initialValues,
@@ -80,7 +84,9 @@ const App: React.FC = (props) => {
   const begin = (rowname) => {
     //console.log('onclick pass data props to FormikForm');
     console.log(rowname);
+    return rowname;
   }
+  console.log("this is fetch data", listitems)
 
   return (
     <React.Fragment>
@@ -97,7 +103,7 @@ const App: React.FC = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {listItems.map((row, index) => {
+                {listItems && listItems.map((row, index) => {
                   return (
                     <TableRow key={row.id}>
                       <TableCell component="th" scope="row">
@@ -119,14 +125,17 @@ const App: React.FC = (props) => {
           <Col className="col-sm-6" style={{ backgroundColor: 'rgb(224, 224, 224)', minHeight: '400px' }}>
             <div>
               <h1>Edit Selected</h1><hr />
-              <FormikForm />
+              {listItems && listItems.map((row, index) => {
+                return (
+                  <FormikForm value={row} />
+                )
+              })
+              }
             </div>
           </Col>
         </Row>
       </Container>
-
     </React.Fragment>
-
   )
 };
 

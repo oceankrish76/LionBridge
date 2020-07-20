@@ -13,9 +13,11 @@ interface FormValues {
     labels: Array<{ name: string; value: string }>;
 }
 
-export default function FormikForm(props) {
+export default function FormikForm({ value }) {
+    // console.log('k ho' + value.name);
+    var myJSON = JSON.stringify(value);
     const initialValues: FormValues = {
-        name: '',
+        name: value[Object.keys(value)[1]],
         repo: {
             url: '',
             type: '',
@@ -24,7 +26,7 @@ export default function FormikForm(props) {
     };
 
     const validate = (values: FormValues): FormikErrors<FormValues> => {
-        console.log('validate', values);
+        //console.log('validate', values);
         const errors: FormikErrors<FormValues> & { repo: {} } = {
             repo: {},
         };
@@ -43,8 +45,8 @@ export default function FormikForm(props) {
     }
 
     const onSubmit = (values: FormValues, helpers: FormikHelpers<FormValues>) => {
-        console.log('formik submit', values);
-        console.log('formik submit', helpers);
+        // console.log('formik submit', values);
+        // console.log('formik submit', helpers);
     }
 
     return (
