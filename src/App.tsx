@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-
+import ButtonAppBar from './components/ButtonAppBar';
 import FormikForm from './FormikForm';
 import axios from 'axios';
 import {
@@ -79,15 +79,16 @@ const App: React.FC = (props) => {
 
   return (
     <React.Fragment>
+      <ButtonAppBar />
       <Container className="container-fluid container-margin">
         <Row className="row">
-          <Col className="col-sm-6" style={{ backgroundColor: 'rgb(212, 212, 212)', minHeight: '400px' }}>
+          <Col className="col-sm-6" style={{ backgroundColor: 'rgb(212, 212, 212)', minHeight: '719px' }}>
             <h1>List of items</h1><hr />
             <Table>
               <TableHead>
                 <TableRow style={{ backgroundColor: '#c5c5c5', color: 'white', }}>
                   <TableCell>List Items</TableCell>
-                  <TableCell >Edit</TableCell>
+                  <TableCell >Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
