@@ -19,8 +19,8 @@ export default function FormikForm({ value }) {
     const initialValues: FormValues = {
         name: value[Object.keys(value)[1]],
         repo: {
-            url: '',
-            type: '',
+            url: value[Object.keys(value)[3]],
+            type: value[Object.keys(value)[2]],
         },
         labels: [],
     };
@@ -76,30 +76,18 @@ export default function FormikForm({ value }) {
                                 <label>
                                     Name:<br />
                                     <Field type="text" name="name" label="name" required />
-                                    <button type="button" onClick={() => setTouched({ name: true }, false)}>Touched</button>
-                                    <button type="button" onClick={() => setTouched({ name: false }, false)}>Untouched</button>
-                                    {formikProps.touched.name ? 'Touched ' : ''}
-                                    {formikProps.touched.name && formikProps.errors.name}
                                 </label>
                             </p>
                             <p>
                                 <label>
                                     URL:<br />
                                     <Field type="text" name="repo.url" label="url" required />
-                                    <button type="button" onClick={() => setTouched({ repo: { url: true } }, false)}>Touched</button>
-                                    <button type="button" onClick={() => setTouched({ repo: { url: false } }, false)}>Untouched</button>
-                                    {formikProps.touched.repo ?.url ? 'Touched ' : ''}
-                                    {formikProps.touched.repo ?.url && formikProps.errors.repo ?.url}
                                 </label>
                             </p>
                             <p>
                                 <label>
                                     Type:<br />
                                     <Field type="text" name="repo.type" label="type" required />
-                                    <button type="button" onClick={() => setTouched({ repo: { type: true } }, false)}>Touched</button>
-                                    <button type="button" onClick={() => setTouched({ repo: { type: false } }, false)}>Untouched</button>
-                                    {formikProps.touched.repo ?.type ? 'Touched ' : ''}
-                                    {formikProps.touched.repo ?.type && formikProps.errors.repo ?.type}
                                 </label>
                             </p>
                             <p>
@@ -155,15 +143,6 @@ export default function FormikForm({ value }) {
                                     </h3>
                                 </div>
                             </div>
-                            <p>
-                                Values: {JSON.stringify(formikProps.values)}
-                            </p>
-                            <p>
-                                Errors: {JSON.stringify(formikProps.errors)}
-                            </p>
-                            <p>
-                                Touched: {JSON.stringify(formikProps.touched)}
-                            </p>
                             <p>
                                 isSubmitting: {JSON.stringify(formikProps.isSubmitting)}<br />
                                 isValidating: {JSON.stringify(formikProps.isValidating)}<br />
