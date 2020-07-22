@@ -45,4 +45,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-# LionBridge
+# 
+
+# To read
+1. https://stackoverflow.com/questions/55696213/react-how-to-pass-formikprops-one-component-up
+
+2. https://spectrum.chat/palmer/formik/passing-down-formik-props-to-lower-components~35815eb6-4ef0-4197-a113-065bb792539e
